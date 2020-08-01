@@ -1,27 +1,33 @@
 getCSS.onclick = () => {
     const request = new XMLHttpRequest();
     request.open('GET', '/style.css');
-    request.onload = () => {
-        console.log('成功了');
-        let style = document.createElement('style')
-        style.innerHTML = request.response;
-        document.head.appendChild(style)
-    }
-    request.onerror = () => {
-        console.log('失败了')
+    request.onreadystatechange = () => {
+        if (request.readyState === 4) {
+            if (request.status >= 200 && request.status < 300) {
+                console.log('成功了');
+                let style = document.createElement('style')
+                style.innerHTML = request.response;
+                document.head.appendChild(style)
+            } else {
+                console.log('加载失败')
+            }
+        }
     }
     request.send();
 }
 getJS.onclick = () => {
     const request = new XMLHttpRequest();
     request.open('GET', '/2.js')
-    request.onload = () => {
-        const script = document.createElement('script');
-        script.innerHTML = request.response;
-        document.body.appendChild(script);
-    }
-    request.onerror = () => {
-        console.log('失败了')
+    request.onreadystatechange = () => {
+        if (request.readyState === 4) {
+            if (request.status >= 200 && request.status < 300) {
+                const script = document.createElement('script');
+                script.innerHTML = request.response;
+                document.body.appendChild(script);
+            } else {
+                console.log('加载失败')
+            }
+        }
     }
     request.send();
 }
