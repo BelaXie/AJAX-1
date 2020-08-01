@@ -1,4 +1,4 @@
-getCSS.onclick = function () {
+getCSS.onclick = () => {
     const request = new XMLHttpRequest();
     request.open('GET', '/style.css');
     request.onload = () => {
